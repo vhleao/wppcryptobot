@@ -11,7 +11,7 @@ wppconnect.create({
             const msg = message.body;
             console.log(message.body);
             const cmd = '/p'
-            const config = require('./config')
+            //const config = require('./config')
 
             if (msg.startsWith(cmd)){
                 const coin2 = msg.substring(3)
@@ -21,7 +21,8 @@ wppconnect.create({
                 const options = 
                     {hostname: 'pro-api.coinmarketcap.com',
                     path: `/v2/cryptocurrency/quotes/latest?symbol=${coin2}` ,
-                    headers: {"X-CMC_PRO_API_KEY":config.key}
+                    //headers: {"X-CMC_PRO_API_KEY":config.key} #changed for heroku env
+                    headers: {"X-CMC_PRO_API_KEY":process.env.key}
                     }
 
                 https.get(options, (resp) => {
